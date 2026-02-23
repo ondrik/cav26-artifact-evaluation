@@ -11,9 +11,20 @@ Justification for the badges: [no need to justify Available -- just provide the 
        Table 1: point (1)
        Figure 1: point (2)
        Figures 2 and 3: point (3)
-       Proof of Thm. 4: point (4)
+       Figure 4: point (4) [requires external connectivity]
+       Proof of Thm. 5: point (5)
       ]
-    - TODO
+    - [which claims/results cannot be replicated and why, e.g.,
+       Table 2: to reproduce the results, one needs to have access to the
+                computer Holly 6000, which is not available outside our research lab
+       Table 3: this table is a result of a survey among undergraduate students
+                at the Institute of Happiness; the survey cannot be reproduced
+                as a part of the artifact, but the raw filled in questionnaires
+                are available in the directory survey/
+       Fig. 6: to obtain the results, one needs to have a working installation
+               of AcmeVerifier of Acme Inc.; if the reviewers possess it, they
+               can reproduce the results by point (6) below.
+      ]
   * Reusable: [give reasons why you believe that the Reusable badge should be awarded (if applied for)]
 
 Requirements:
@@ -25,7 +36,7 @@ Requirements:
 
 external connectivity: [NO/YES]
 
-  [If YES, clarify here what is being accessed and why.]
+  [If YES, clarify here what is being accessed and why.  If external connectivity is required for some part, please indicate.]
 
 -------------------------------------------------------------------------------
 **                                SMOKE TEST                                 **
@@ -81,9 +92,28 @@ The output will be a file "output.csv".
 
     the figure will then be in results/fig2.png and results/fig3.pdf
 
-(4) To certify the proof of Thm. 4., run
+(4) [this point requires external connectivity]
+    To generate Figure 4, run
 
-    rocqc thm4_proof.v
+    cd results/
+    ./generate_fig4.sh survey/data.xml
+
+    this will access the servers of Acme Inc. to generate the figure, which will be in results/fig4.svg
+
+(5) To certify the proof of Thm. 5., run
+
+    rocqc thm5_proof.v
     echo "exit code = $?"
 
     if exit code is 0, the proof is verified
+
+(6) [optional, this step needs a working copy of AcmeVerifier]
+    To generate Figure 6, run the following command
+    
+    # set up a working copy of AcmeVerifier on the virtual machine
+    export ACME_VER_PATH=<path to the AcmeVerifier binary>
+    export ACME_VER_LICENSE_KEY=<AcmeVerifier license key>
+    ./run_acme.sh output_acme.csv
+    ./generate_fig5.sh output_acme.csv
+
+    the resulting figure will be in results/fig5.gif
