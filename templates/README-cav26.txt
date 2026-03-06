@@ -6,7 +6,14 @@ Claimed badges: Available + Functional + Reusable [remove which do not apply; no
 
 Justification for the badges: [no need to justify Available -- just provide the DOI link in HotCRP]
 
-  * Functional: [give reasons why you believe that the Functional badge should be awarded (if applied for)]
+  * Functional: [give reasons why you believe that the Functional badge should
+    be awarded (if applied for Functional or Reusable); example:  The artifact
+    replicates most of the results in the paper (see below for details).  It
+    compiles Tool and executes the benchmarks on it and the other tools.  We
+    validate the correctness of the outputs of Tool by cross-comparison with
+    the results of the other tools.  The source code of Tool is included in the
+    artifact.]
+
     - replicated: [which claims/results of the paper are replicated by the
       artifact and how (you can, e.g., refer to a concrete point in FULL REVIEW
       below), e.g.,
@@ -16,6 +23,7 @@ Justification for the badges: [no need to justify Available -- just provide the 
        * Figure 4: point (4) [requires external connectivity]
        * Proof of Thm. 5: point (5)
       ]
+
     - not-replicated: [which claims/results cannot be replicated and why, e.g.,
        * Table 2: to reproduce the results, one needs to have access to the
                   computer Holly 6000, which is not available outside our
@@ -28,8 +36,11 @@ Justification for the badges: [no need to justify Available -- just provide the 
                  of AcmeVerifier of Acme Inc.; if the reviewers have it,
                  they can reproduce the results by point (6) below.
       ]
+
   * Reusable: [give reasons why you believe that the Reusable badge should be
-    awarded (if applied for)]
+    awarded (if applied for); e.g., The license of Tool is GNU GPLv3.  Tool is
+    provided with an extensive test suite (in /tool/tests/) and documentation
+    (in /tool/doc after the tool is compiled).
 
 Requirements:
 
@@ -58,13 +69,34 @@ external connectivity: [NO/YES]
 [below is an example of how to write this section; delete it and substitute
 with your instructions]
 
+[if using Docker, please provide the instruction also for loading the docker
+image etc., e.g.,
+
+Run the following to load the Docker image:
+
+  docker load < docker-tool-image.tar
+
+After that, run the image using
+
+  docker run -v `pwd`/output:/tool/output --rm -it docker-tool
+
+The command above starts the docker container and places you in a bash
+environment, where you can inspect the source code or run the experiments. `-v`
+option will mount `output` folder in your current directory to the
+corresponding folder within the container where the evaluation results will be
+stored. This will allow you to view the generated output even after the
+container has stopped running. `--rm` is an optional flag that creates a
+disposable container that will be deleted upon exit.
+]
+
 Download the artifact package on the virtual machine into the $HOME directory
 and run the following:
 
   cd artifact/
   ./install.sh
 
-This starts the installation process of Tool, Debian and Python packages, and other tools.
+This starts the installation process of Tool, Debian and Python packages, and
+other tools that we compare with.
 
 Start the smoke test with
 
@@ -134,7 +166,8 @@ folder ref_output_smoke/.
 
 If the results are not as described above, please check the file
 $HOME/artifact/smoke.log and try to identify something extraordinary (e.g. by
-comparing it to the file ref_output_smoke/smoke.log.ref).
+comparing it to the file ref_output_smoke/smoke.log.ref) and include the part
+of the log in the review.
 
 -------------------------------------------------------------------------------
 **                               FULL REVIEW                                 **
@@ -161,6 +194,9 @@ The output will be a file "output.csv".
 
 For completeness, we included the output files obtained by our experiments in
 folder ref_output_full/.
+
+In the following outputs, concrete values may differt but the overall trends
+(e.g., ratios between the mean times of the tools) should stay the same.
 
 (1) To obtain the results in Table 1, run the following command:
 
